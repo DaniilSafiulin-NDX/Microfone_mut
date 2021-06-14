@@ -1,4 +1,4 @@
-var body, num, array, width, context, logo, myElements, analyser, src;
+var body, num, array, width, context, logo, myElements, analyser, src, height;
 
 body = document.querySelector('body');
 
@@ -17,10 +17,9 @@ window.onclick = function(){
     for(var i = 0 ; i < num ; i++){
         logo = document.createElement('div');
         logo.className = 'logo';
-        logo.style.background = 'red';
-        logo.style.minVidth = width+'px';
+        logo.style.background = 'green';
+        logo.style.minWidth = width+'px';
         body.appendChild(logo);
-
     }
 
     myElements = document.getElementsByClassName('logo');
@@ -34,18 +33,17 @@ window.onclick = function(){
         src.connect(analyser);
         loop();
     }).catch(error => {
-        alert(error + '\r\n\ Отклонено. Страница будет обновлена!');
+        alert(error + '\r\n\ Отклонено!');
         location.reload();
     });
 }
 
-function loop(){
+function loop() {
     window.requestAnimationFrame(loop);
     analyser.getByteFrequencyData(array);
     for(var i = 0 ; i < num ; i++){
         height = array[i+num];
         myElements[i].style.minHeight = height+'px';
-        myElements[i].style.opasity = 0.8*height;
-
+        myElements[i].style.opacity = 0.008*height;
     }
 }
